@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="hbase-federation-1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../huawei/hbase_federation_jar/hbase-federation-1.0-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
