@@ -1,9 +1,8 @@
 package com.weifeng.hbase.federation.counter;
 
-import com.weifeng.hbase.helper.HBaseHelper;
+import com.weifeng.hbase.federation.helper.HbaseUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.Cell;
-import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
@@ -15,13 +14,14 @@ import java.util.NavigableMap;
 public class IncrementMultipleExample {
 
   public static void main(String[] args) throws IOException {
-    Configuration conf = HBaseConfiguration.create();
+    // 1. 获取hbase集群的conf
+    Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
 
-    HBaseHelper helper = HBaseHelper.getHelper(conf);
+    HbaseUtil helper = HbaseUtil.getHelper(hConf);
     helper.dropTable("testtable");
     helper.createTable("testtable", "daily", "weekly");
 
-    Connection connection = ConnectionFactory.createConnection(conf);
+    Connection connection = ConnectionFactory.createConnection(hConf);
     Table table = connection.getTable(TableName.valueOf("testtable"));
 
     Increment increment1 = new Increment(Bytes.toBytes("20150101"));

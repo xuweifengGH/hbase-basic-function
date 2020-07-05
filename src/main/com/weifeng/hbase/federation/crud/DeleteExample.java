@@ -1,13 +1,9 @@
 package com.weifeng.hbase.federation.crud;
 
-import com.weifeng.hbase.helper.HBaseHelper;
+import com.weifeng.hbase.federation.helper.HbaseUtil;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
-import org.apache.hadoop.hbase.client.Connection;
-import org.apache.hadoop.hbase.client.ConnectionFactory;
-import org.apache.hadoop.hbase.client.Delete;
-import org.apache.hadoop.hbase.client.Table;
+import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
@@ -15,9 +11,10 @@ import java.io.IOException;
 public class DeleteExample {
 
   public static void main(String[] args) throws IOException {
-    Configuration conf = HBaseConfiguration.create();
+    // 1. 获取hyperbase1集群的conf
+    Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
 
-    HBaseHelper helper = HBaseHelper.getHelper(conf);
+    HbaseUtil helper = HbaseUtil.getHelper(hConf);
     helper.dropTable("testtable");
     helper.createTable("testtable", 100, "colfam1", "colfam2");
     helper.put("testtable",
@@ -29,7 +26,7 @@ public class DeleteExample {
     System.out.println("Before delete call...");
     helper.dump("testtable", new String[]{ "row1" }, null, null);
 
-    Connection connection = ConnectionFactory.createConnection(conf);
+    Connection connection = ConnectionFactory.createConnection(hConf);
     Table table = connection.getTable(TableName.valueOf("testtable"));
 
     Delete delete = new Delete(Bytes.toBytes("row1"));

@@ -1,11 +1,11 @@
 package com.weifeng.hbase.federation.counter;
 
-import com.weifeng.hbase.helper.HBaseHelper;
+import com.weifeng.hbase.federation.helper.HbaseUtil;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
+import org.apache.hadoop.hbase.client.HBaseConfigurationFactory;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.util.Bytes;
 
@@ -14,12 +14,13 @@ import java.io.IOException;
 public class IncrementSingleExample {
 
   public static void main(String[] args) throws IOException {
-    Configuration conf = HBaseConfiguration.create();
+    // 1. 获取hbase集群的conf
+    Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
 
-    HBaseHelper helper = HBaseHelper.getHelper(conf);
+    HbaseUtil helper = HbaseUtil.getHelper(hConf);
     helper.dropTable("testtable");
     helper.createTable("testtable", "daily");
-    Connection connection = ConnectionFactory.createConnection(conf);
+    Connection connection = ConnectionFactory.createConnection(hConf);
     Table table = connection.getTable(TableName.valueOf("testtable"));
     // vv IncrementSingleExample
     long cnt1 = table.incrementColumnValue(Bytes.toBytes("20110101"), // co IncrementSingleExample-1-Incr1 Increase counter by one.

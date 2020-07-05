@@ -1,6 +1,6 @@
 package com.weifeng.hbase.federation;
 
-import com.weifeng.hbase.helper.HBaseHelper;
+import com.weifeng.hbase.federation.helper.HbaseUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
@@ -11,10 +11,10 @@ import java.io.IOException;
 public class TestGet {
     public static void main(String[] args) {
         // 1. 获取hbase集群的conf
-        Configuration hbaseConf = HBaseConfigurationFactory.getHbaseConfiguration("hbase1");
+        Configuration hbaseConf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
         //Configuration hyperbaseConf = HBaseConfigurationFactory.getHbaseConfiguration("hbase2");
         try {
-            HBaseHelper helper = HBaseHelper.getHelper(hbaseConf);
+            HbaseUtil helper = HbaseUtil.getHelper(hbaseConf);
             if (!helper.existsTable("testtable")) {
                 helper.createTable("testtable", "colfam1");
             }

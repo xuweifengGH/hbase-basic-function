@@ -1,4 +1,4 @@
-package com.weifeng.hbase.helper;
+package com.weifeng.hbase.federation.helper;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.*;
@@ -14,20 +14,20 @@ import java.util.Random;
 /**
  * examples to generate tables and fill them with test data.
  */
-public class HBaseHelper implements Closeable {
+public class HbaseUtil implements Closeable {
 
   private Configuration configuration = null;
   private Connection connection = null;
   private Admin admin = null;
 
-  protected HBaseHelper(Configuration configuration) throws IOException {
+  protected HbaseUtil(Configuration configuration) throws IOException {
     this.configuration = configuration;
     this.connection = ConnectionFactory.createConnection(configuration);
     this.admin = connection.getAdmin();
   }
 
-  public static HBaseHelper getHelper(Configuration configuration) throws IOException {
-    return new HBaseHelper(configuration);
+  public static HbaseUtil getHelper(Configuration configuration) throws IOException {
+    return new HbaseUtil(configuration);
   }
 
   @Override

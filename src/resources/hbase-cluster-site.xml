@@ -3,16 +3,16 @@
 <!-- 添加实际的hbase集群配置信息 -->
 <property>
     <name>hbase.clusternames</name>
-    <value>hbase1,hbase2</value>
+    <value>hyperbase1,hbase</value>
 </property>
 
 <property>
-    <name>hbase.cluster.configuration.hbase1</name>
-    <value>/Users/xuweifeng/weifeng/git/hbase-basic-function/src/resources/hbase1</value>
+    <name>hbase.cluster.configuration.hyperbase1</name>
+    <value>/Users/xuweifeng/weifeng/git/hbase-basic-function/src/resources/hyperbase1</value>
 </property>
 <property>
-    <name>hbase.cluster.configuration.hbase2</name>
-    <value>/Users/xuweifeng/weifeng/git/hbase-basic-function/src/resources/hbase2</value>
+    <name>hbase.cluster.configuration.hbase</name>
+    <value>/Users/xuweifeng/weifeng/git/hbase-basic-function/src/resources/hbase</value>
 </property>
 </configuration>
 

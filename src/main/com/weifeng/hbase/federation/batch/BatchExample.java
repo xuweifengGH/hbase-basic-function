@@ -1,8 +1,7 @@
 package com.weifeng.hbase.federation.batch;
 
-import com.weifeng.hbase.helper.HBaseHelper;
+import com.weifeng.hbase.federation.helper.HbaseUtil;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
@@ -21,9 +20,10 @@ public class BatchExample {
   private final static byte[] QUAL2 = Bytes.toBytes("qual2");
 
   public static void main(String[] args) throws IOException, InterruptedException {
-    Configuration conf = HBaseConfiguration.create();
+    // 1. 获取hbase集群的conf
+    Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
 
-    HBaseHelper helper = HBaseHelper.getHelper(conf);
+    HbaseUtil helper = HbaseUtil.getHelper(hConf);
     helper.dropTable("testtable");
     helper.createTable("testtable", "colfam1", "colfam2");
     helper.put("testtable",
@@ -35,7 +35,7 @@ public class BatchExample {
     System.out.println("Before batch call...");
     helper.dump("testtable", new String[] { "row1", "row2" }, null, null);
 
-    Connection connection = ConnectionFactory.createConnection(conf);
+    Connection connection = ConnectionFactory.createConnection(hConf);
     Table table = connection.getTable(TableName.valueOf("testtable"));
 
     List<Row> batch = new ArrayList<Row>();

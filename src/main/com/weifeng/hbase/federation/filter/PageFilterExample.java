@@ -1,8 +1,7 @@
 package com.weifeng.hbase.federation.filter;
 
-import com.weifeng.hbase.helper.HBaseHelper;
+import com.weifeng.hbase.federation.helper.HbaseUtil;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.filter.Filter;
@@ -16,15 +15,16 @@ public class PageFilterExample {
   private static final byte[] POSTFIX = new byte[] { 0x00 };
 
   public static void main(String[] args) throws IOException {
-    Configuration conf = HBaseConfiguration.create();
+    // 1. 获取hbase集群的conf
+    Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
 
-    HBaseHelper helper = HBaseHelper.getHelper(conf);
+    HbaseUtil helper = HbaseUtil.getHelper(hConf);
     helper.dropTable("testtable");
     helper.createTable("testtable", "colfam1");
     System.out.println("Adding rows to table...");
     helper.fillTable("testtable", 1, 100, 10, "colfam1");
 
-    Connection connection = ConnectionFactory.createConnection(conf);
+    Connection connection = ConnectionFactory.createConnection(hConf);
     Table table = connection.getTable(TableName.valueOf("testtable"));
 
     Filter filter = new PageFilter(15);
