@@ -31,8 +31,7 @@ public class IncrementMultipleExample {
     increment1.addColumn(Bytes.toBytes("weekly"), Bytes.toBytes("clicks"), 10);
     increment1.addColumn(Bytes.toBytes("weekly"), Bytes.toBytes("hits"), 10);
 
-    Map<byte[], NavigableMap<byte[], Long>> longs =
-      increment1.getFamilyMapOfLongs();
+    Map<byte[], NavigableMap<byte[], Long>> longs = increment1.getFamilyMapOfLongs();
     for (byte[] family : longs.keySet()) {
       System.out.println("Increment #1 - family: " + Bytes.toString(family));
       NavigableMap<byte[], Long> longcols = longs.get(family);
