@@ -12,7 +12,8 @@ public class DeleteExample {
 
   public static void main(String[] args) throws IOException {
     // 1. 获取hyperbase1集群的conf
-    Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
+    //Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
+    Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hbase");
 
     HbaseUtil helper = HbaseUtil.getHelper(hConf);
     helper.dropTable("testtable");

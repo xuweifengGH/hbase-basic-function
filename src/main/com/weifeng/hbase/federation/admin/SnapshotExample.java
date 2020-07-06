@@ -15,7 +15,9 @@ public class SnapshotExample {
   public static void main(String[] args)
     throws IOException, InterruptedException {
     // 1. 获取Hyperbase集群的conf
-    Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
+    //Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
+    Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hbase");
+
     hConf.setInt("hbase.client.retries.number", 1);
 
     HbaseUtil helper = HbaseUtil.getHelper(hConf);

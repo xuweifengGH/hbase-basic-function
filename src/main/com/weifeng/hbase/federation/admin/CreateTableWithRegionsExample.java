@@ -35,7 +35,8 @@ public class CreateTableWithRegionsExample {
 
   public static void main(String[] args) throws IOException {
     // 1. 获取Hyperase集群的conf
-    conf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
+    //conf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
+    conf = HBaseConfigurationFactory.getHbaseConfiguration("hbase");
     connection = ConnectionFactory.createConnection(conf);
     HbaseUtil helper = HbaseUtil.getHelper(conf);
     helper.dropTable("testtable1");
