@@ -12,8 +12,8 @@ public class PutExample {
 
   public static void main(String[] args) throws IOException {
     // 1. 获取hbase集群的conf
-    Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
-    //Configuration conf = HBaseConfigurationFactory.getHbaseConfiguration("hbase2");
+    //Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hyperbase1");
+    Configuration hConf = HBaseConfigurationFactory.getHbaseConfiguration("hbase");
     HbaseUtil helper = HbaseUtil.getHelper(hConf);
     helper.dropTable("testtable");
     helper.createTable("testtable", "colfam1");
